@@ -1,42 +1,41 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 const int N = 1e+5;
 int queue_[N];
 int n;
 int front = -1;
 int rear = -1;
-void enque_()
+void enqueue_()
 {
-    if(front == -1 && rear == -1)
+    if (rear == n - 1)
     {
-        int x;
-        cout << "Number you want to enque: ";
-        cin >> x;
-        queue_[rear] = x;
-        front++;
-        rear++;
+        cout << "Overflow!" << endl;
+        return;
     }
-    else 
+    int x;
+    cout << "Number you want to enqueue: ";
+    cin >> x;
+    if (front == -1 && rear == -1)
     {
-        int x;
-        cout << "Number you want to enque: ";
-        cin >> x;
-        queue_[rear] = x;
-        rear++;
+        front = rear = 0;
     }
+    else rear++;
+    queue_[rear] = x;
 }
 void deque_()
 {
-    if(front == -1 && rear == -1)
+    if (front == -1 && rear == -1)
     {
         cout << "Underflow!" << endl;
     }
-    else if(front == rear)
+    else if (front == rear)
     {
         front = -1;
         rear = -1;
     }
-    else{
+    else
+    {
+        cout << "Removed number: " << queue_[front] << endl;
         front++;
     }
 }
@@ -55,15 +54,19 @@ int main()
     cout << "How many functions you want to do: ";
     int times;
     cin >> times;
-    while(times--)
+    while (times--)
     {
-        cout << "Type the following function you want to use : \n1.enque\n2.dequeue\n3.peek\n4.display";
+        cout << "Type the following function you want to use : \n1.enqueue\n2.dequeue\n3.peek\n4.display\n";
         string s;
         cin >> s;
-        if(s == "enque") enque_();
-        else if(s == "dequeue") deque_();
-        else if (s == "display") display();
-        else if (s == "peek") cout << queue_[front] << endl;
+        if (s == "enqueue")
+            enqueue_();
+        else if (s == "dequeue")
+            deque_();
+        else if (s == "display")
+            display();
+        else if (s == "peek")
+            cout << queue_[front] << endl;
     }
     return 0;
 }
